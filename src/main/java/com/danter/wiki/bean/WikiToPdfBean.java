@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -138,7 +139,7 @@ public class WikiToPdfBean implements Serializable {
 		if (receivedGoodInput()) {
 
 			String fileName = wikiUrl.replaceAll("http(s)*://github.com/", "")
-					.replaceAll("/", "_").replace("_wiki", "") + System.currentTimeMillis() + ".pdf";
+					.replaceAll("/", "_").replace("_wiki", "") + UUID.randomUUID().toString() + ".pdf";
 
 			ConvertGithubWiki converter = new ConvertGithubWiki(wikiUrl);
 			String htmlDocument = null;
