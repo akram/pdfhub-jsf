@@ -140,7 +140,7 @@ public class WikiToPdfBean implements Serializable {
 		if (receivedGoodInput()) {
 
 			String fileName = wikiUrl.replaceAll("http(s)*://github.com/", "")
-					.replaceAll("/", "_").replace("_wiki", "") + new SimpleDateFormat("-yyyy-M-dd_hh-mm-ss-SS").format(new Date()) + ".pdf";
+					.replaceAll("/", "_").replace("_wiki", "") + new SimpleDateFormat("-yyyy-M-dd_HH-mm-ss-SS").format(new Date()) + ".pdf";
 
 			ConvertGithubWiki converter = new ConvertGithubWiki(wikiUrl);
 			String htmlDocument = null;
