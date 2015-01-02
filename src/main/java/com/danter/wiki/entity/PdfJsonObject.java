@@ -1,0 +1,23 @@
+package com.danter.wiki.entity;
+
+import java.util.List;
+
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
+public class PdfJsonObject {
+	
+	@XmlElement(name="title")
+	public String title;
+	@XmlElement(name="urls")
+	public List<String> urls;
+	
+	@Override
+	public String toString() {
+		return "PdfJsonObject [title=" + title + ", urls=" + urls + "]";
+	}
+	
+	
+
+}

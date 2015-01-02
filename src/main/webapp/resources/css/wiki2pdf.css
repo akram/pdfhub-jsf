@@ -1,0 +1,112 @@
+@CHARSET "UTF-8";
+
+body {
+	font-family: Sans-Serif;
+}
+
+.ui-growl {
+	left: 4px;
+	top: 4px;
+}
+
+.center_logo {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 35px; 
+	width: 366px;
+	font-size: xx-large;
+	text-align: center;
+}
+
+.center {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px; 
+	padding : 4px;
+	width: 566px;
+}
+
+.renderBtn {
+	-webkit-appearance: none;
+	width: 48%;
+	margin: 1%;
+}
+
+.goBtn {
+	-webkit-appearance: none;
+	float: right;
+	width: 16%;
+	margin: 0;
+}
+
+.wikiUrl {
+	width: 78%;
+	height: 28px;
+	margin: 0 1% !important;
+}
+
+.wikiTitle {
+	width: 448px;
+	height: 43px;
+	font-weight: bolder;
+	font-size: 20px;
+	margin: 12px 0 0px 0;
+	text-align: left;
+}
+
+input {
+	border: solid #666 1px;
+}
+
+input.clear {
+	border: none;
+}
+
+fieldset {
+	width: 420px;
+}
+
+.inline_logo {
+	width: 80px;
+	padding: 3px 3px 0px 3px;
+	border: 1px solid #999;
+}
+
+#footer {
+	position: absolute;
+	bottom: 0;
+	width: 98%;
+	height: 60px;
+	z-index: -10000;
+}
+
+#footer img {
+	padding: 0 9px;
+	bottom: 0;
+	height: 50px;
+}
+
+.right {
+	text-align: right;
+}
+
+.hint {
+	text-align: right;
+	color: #999;
+	font-size: small;
+	margin: 0 5px 0 0;
+}
+
+.box {
+	/* position: relative; */
+	width: 466px;
+	padding: 25px 50px;
+	margin: 0 auto;
+	background-color: #fff;
+	-webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px
+		rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px
+		rgba(0, 0, 0, 0.1);
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2), inset 0 0 50px
+		rgba(0, 0, 0, 0.1);
+}

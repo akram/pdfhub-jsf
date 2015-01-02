@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>github wiki &rarr; pdf</title>
+	<h:outputStylesheet library="css" name="wiki2pdf.css" />
+	<script type="text/javascript">
+		function start() {
+		    PF('statusDialog').show();
+		}
+		
+		function stop() {
+		    PF('statusDialog').hide();
+		}
+        </script>
+</h:head>
+<h:body>
+	<f:metadata>
+		<o:enableRestorableView />
+	</f:metadata>
+
+	<p:dialog modal="true" widgetVar="statusDialog" draggable="false" closable="false" resizable="false">
+	    <p:graphicImage value="/resources/images/ajaxloadingbar.gif" />
+	</p:dialog>
+
+	<p:growl id="messages" showDetail="false" />
+
+	<div class="center_logo">
+	github wiki &rarr; pdf
+	</div>
+
+	<h:form id="pageForm">
+
+		<div class="center">
+			<p:fragment rendered="#{empty wikiToPdfBean.wikiUrl}">
+			<p:inputText styleClass="wikiUrl" value="#{wikiToPdfBean.wikiUrl}"
+				placeholder="your github wiki url" required="true"
+				requiredMessage="paste in a github wiki url and click go"
+				 />
+			<p:commandButton 
+				actionListener="#{wikiToPdfBean.goBtnAction}"
+				styleClass="goBtn"
+				value="go"
+				ajax="false" />
+			</p:fragment>
+			
+			<p:fragment rendered="#{not empty wikiToPdfBean.wikiUrl}">
+			<p:inputText styleClass="wikiUrl" value="#{wikiToPdfBean.wikiUrl}"
+				placeholder="your github wiki url" required="true"
+				disabled="true"
+				requiredMessage="paste in a github wiki url and click go"
+				 />
+			<p:commandButton 
+				actionListener="#{wikiToPdfBean.clearAction}"
+				styleClass="goBtn"
+				value="clear"
+				onclick="return confirm('Are you sure?');"
+				ajax="false" />
+			</p:fragment>
+			<br />
+			<br />
+			<p:fragment id="docMetaphore" rendered="#{wikiToPdfBean.wikiUrl!=null and wikiToPdfBean.wikiPages!=null}">
+			<div class="hint">hint: customize your document</div>
+			<div class="box">
+				<h:selectBooleanCheckbox value="#{wikiToPdfBean.includeHeader}" /> <h:graphicImage
+					class="inline_logo" value="/resources/images/redhat_logo.jpg" />
+				<p:inputTextarea styleClass="wikiTitle" value="#{wikiToPdfBean.wikiTitle}" placeholder="title" required="true" requiredMessage="you forgot the title"/>
+				<div class="hint">hint: document's title on page 1</div>
+				<br />
+				<p:pickList id="pickList" value="#{wikiToPdfBean.wikiPages}"
+					var="page" itemLabel="#{page}" itemValue="#{page}">
+					<f:facet name="sourceCaption">available pages</f:facet>
+					<f:facet name="targetCaption">selected pages</f:facet>
+				</p:pickList>
+				<div class="hint">hint: drag &amp; drop to reorder pages</div>
+				<br />
+				<div class="right"><h:selectBooleanCheckbox value="#{wikiToPdfBean.includePageNums}" /> page numbers</div>
+			</div>
+				<br />
+				<div class="right">
+				<p:commandButton 
+				id="downloadLink" 
+				value="get pdf"
+				ajax="false" 
+				onclick="PrimeFaces.monitorDownload(start, stop)" 
+        		>
+    				<p:fileDownload value="#{wikiToPdfBean.pdf}" />
+				</p:commandButton>
+			</div>
+			</p:fragment>
+			</div>
+		<div id="footer">
+			<h:graphicImage value="/resources/images/redhat_logo.jpg" />
+			<h:graphicImage value="/resources/images/jbosscorp_logo.png" />
+			<h:graphicImage value="/resources/images/openshift_logo.png" />
+		</div>
+	</h:form>
+
+</h:body>
+</html>
