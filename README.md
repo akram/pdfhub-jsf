@@ -1,3 +1,3 @@
-The OpenShift `jbosseap` cartridge documentation can be found at:
+Convert any Github wiki to a PDF! This app is geared towards content creators who need to deliver a Github wiki in cross-platform printer friendly single document format. It is the first straightforward solution to address this problem. The app resolves image URLs, preserves links, and properly formats <pre> tags for print. 
 
-http://openshift.github.io/documentation/oo_cartridge_guide.html#jbosseap
+Implemented using JSF 2/Facelets in the JBoss EAP cartridge on OpenShift. The app has a light weight front end, uses no persistence layer, a @ViewScoped CDI bean, and libraries that facilitate PDF creation.
