@@ -162,7 +162,7 @@ public class ConvertGithubWiki {
 				+ "code{white-space: pre;}"
 				+ "pre {white-space: pre-wrap !important;white-space: -moz-pre-wrap !important;white-space: -pre-wrap !important;white-space: -o-pre-wrap !important;word-wrap: break-word; !important}";
 		if (includeHeader) {
-			header += "@page {margin-top: 2.5cm;background:#ffffff url('http://wiki2pdf-matyas.rhcloud.com/resources/images/redhat_logo.jpg') no-repeat 16px 16px;background-size: auto 60px;}";
+			header += "@page {margin-top: 2.5cm;background:#ffffff url('http://pdfhub-matyas.rhcloud.com/resources/images/redhat_logo.jpg') no-repeat 16px 16px;background-size: auto 60px;}";
 		}
 		if (includePageNums) {
 			header += "#footer {position: running(footer);text-align: right;}"
