@@ -4,13 +4,13 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URISyntaxException;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.StreamingOutput;
@@ -28,8 +28,7 @@ public class WikiToPdfV1Service {
 	private static final Logger LOG = LoggerFactory
 			.getLogger(WikiToPdfV1Service.class);
 	
-	@Inject
-	HttpServletRequest request;
+	@Context private HttpServletRequest servletRequest;
 
 	@POST
 	@Produces("application/pdf")
@@ -40,7 +39,7 @@ public class WikiToPdfV1Service {
 
 		LOG.warn(json.toString());
 
-		ConvertGithubWiki converter = new ConvertGithubWiki("", request.getContextPath());
+		ConvertGithubWiki converter = new ConvertGithubWiki("", servletRequest.getContextPath());
 
 		String htmlDocument = converter.constructRestDocument(json.title,
 				json.urls, Boolean.TRUE, Boolean.TRUE);
