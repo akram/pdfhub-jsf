@@ -29,11 +29,13 @@ public class ConvertGithubWiki {
 
 	private static final Logger LOG = LoggerFactory.getLogger(ConvertGithubWiki.class);
 	
+	private String contextPath;
 	private String wikiUrl;
 	private Elements wikiPageLinks;
 	
-	public ConvertGithubWiki(final String wikiUrl) {
+	public ConvertGithubWiki(final String wikiUrl, final String contextPath) {
 		this.wikiUrl = wikiUrl;
+		this.contextPath = contextPath;
 	}
 
 	public String constructDocument(String title, List<String> selectedPageNames,
@@ -151,7 +153,7 @@ public class ConvertGithubWiki {
 		return pageLinks;
 	}
 
-	private static String getHeader(boolean includeHeader, Boolean includePageNums) {
+	private String getHeader(boolean includeHeader, Boolean includePageNums) {
 		String header = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
 				+ "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">"
 				+ "<html>"
@@ -162,7 +164,7 @@ public class ConvertGithubWiki {
 				+ "code{white-space: pre;}"
 				+ "pre {white-space: pre-wrap !important;white-space: -moz-pre-wrap !important;white-space: -pre-wrap !important;white-space: -o-pre-wrap !important;word-wrap: break-word; !important}";
 		if (includeHeader) {
-			header += "@page {margin-top: 2.5cm;background:#ffffff url('http://pdfhub-matyas.rhcloud.com/resources/images/redhat_logo.jpg') no-repeat 16px 16px;background-size: auto 60px;}";
+			header += "@page {margin-top: 2.5cm;background:#ffffff url('"+contextPath+"/resources/images/redhat_logo.jpg') no-repeat 16px 16px;background-size: auto 60px;}";
 		}
 		if (includePageNums) {
 			header += "#footer {position: running(footer);text-align: right;}"
