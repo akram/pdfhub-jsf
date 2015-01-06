@@ -40,16 +40,16 @@ public class ConvertGithubWiki {
 		this.contextPath = contextPath;
 	}
 
-	public String constructDocument(String title, List<String> selectedPageNames,
-			Boolean includeHeader, Boolean includePageNums)
-			throws IOException, URISyntaxException {
-		
+	public String constructDocument(String title,
+			List<String> selectedPageNames, Boolean includeHeader,
+			Boolean includePageNums) throws IOException, URISyntaxException {
+
 		wikiPageLinks = getPageLinks();
 
 		String fullDocument = "";
 		fullDocument = getHeader(includeHeader, includePageNums);
 
-		fullDocument += "<h1>"+title+"</h1>";
+		fullDocument += "<h1>" + title + "</h1>";
 
 		fullDocument += getBody(wikiPageLinks, selectedPageNames);
 
@@ -57,7 +57,7 @@ public class ConvertGithubWiki {
 
 		Document doc = Jsoup.parse(fullDocument);
 		doc.outputSettings().syntax(Syntax.xml);
-		
+
 		return doc.toString();
 
 	}
@@ -78,7 +78,7 @@ public class ConvertGithubWiki {
 
 		Document doc = Jsoup.parse(fullDocument);
 		doc.outputSettings().syntax(Syntax.xml);
-		
+
 		return doc.toString();
 
 	}
@@ -226,7 +226,7 @@ public class ConvertGithubWiki {
 
 		String fullDocument = "";
 
-		for (String url : pageUrls) {
+		for (final String url : pageUrls) {
 
 			Document pageDoc = Jsoup.connect(url).get();
 			Element wikiContent = pageDoc.select("body").first();
@@ -237,7 +237,8 @@ public class ConvertGithubWiki {
 		return fullDocument;
 	}
 
-	private static String cleanHtmlOutput(String htmlText, String href) {
+	private static String cleanHtmlOutput(final String htmlText,
+			final String href) {
 
 		String output;
 		Document pageDoc = Jsoup.parse(htmlText);
@@ -252,7 +253,7 @@ public class ConvertGithubWiki {
 		return "</body></html>";
 	}
 
-	private static String getMetaTag(Document document, String attr) {
+	private static String getMetaTag(final Document document, final String attr) {
 		Elements elements = document.select("meta[name=" + attr + "]");
 		for (Element element : elements) {
 			final String s = element.attr("content");

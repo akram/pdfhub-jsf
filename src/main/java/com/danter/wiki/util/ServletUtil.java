@@ -1,18 +1,27 @@
 package com.danter.wiki.util;
 
 import javax.servlet.http.HttpServletRequest;
+/*
+ * Utility Class for constructing a URL from a resource
+ */
+public final class ServletUtil {
+	
+	private ServletUtil(){
+		//seal
+	}
 
-public class ServletUtil {
-
-	public static String createURL(HttpServletRequest request, String resourcePath) {
+	/*
+	 * constructs  a URL from a resource
+	 */
+	public static String createURL(final HttpServletRequest request, final String resourcePath) {
 		 
-	    int port = request.getServerPort();
-	    StringBuilder result = new StringBuilder();
+	    final int port = request.getServerPort();
+	    final StringBuilder result = new StringBuilder();
 	    result.append(request.getScheme())
 	            .append("://")
 	            .append(request.getServerName());
 	 
-	    if ( (request.getScheme().equals("http") && port != 80) || (request.getScheme().equals("https") && port != 443) ) {
+	    if ( ("http".equals(request.getScheme()) && port != 80) || ("https".equals(request.getScheme()) && port != 443) ) {
 	        result.append(':')
 	            .append(port);
 	    }
@@ -21,7 +30,7 @@ public class ServletUtil {
 	 
 	    if(resourcePath != null && resourcePath.length() > 0) {
 	        if( ! resourcePath.startsWith("/")) {
-	            result.append("/");
+	            result.append('/');
 	        }
 	        result.append(resourcePath);
 	    }
