@@ -24,46 +24,51 @@ import com.danter.wiki.util.ConvertGithubWiki;
 import com.danter.wiki.util.ServletUtil;
 
 @Path("/v1")
-public class WikiToPdfV1Service {
+public class WikiToPdfV1Service
+{
 
-	private static final Logger LOG = LoggerFactory
-			.getLogger(WikiToPdfV1Service.class);
-	
-	@Context private HttpServletRequest servletRequest;
+   private static final Logger LOG = LoggerFactory
+            .getLogger(WikiToPdfV1Service.class);
 
-	@POST
-	@Produces("application/pdf")
-	@Path("/pdf")
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response pdfFromList(PdfJsonObject json) throws IOException,
-			URISyntaxException {
+   @Context
+   private HttpServletRequest servletRequest;
 
-		LOG.warn(json.toString());
+   @POST
+   @Produces("application/pdf")
+   @Path("/pdf")
+   @Consumes(MediaType.APPLICATION_JSON)
+   public Response pdfFromList(PdfJsonObject json) throws IOException,
+            URISyntaxException
+   {
 
-		ConvertGithubWiki converter = new ConvertGithubWiki("", ServletUtil.createURL(servletRequest, ""));
+      LOG.warn(json.toString());
 
-		String htmlDocument = converter.constructRestDocument(json.title,
-				json.urls, Boolean.TRUE, Boolean.TRUE);
+      ConvertGithubWiki converter = new ConvertGithubWiki("", ServletUtil.createURL(servletRequest, ""));
 
-		final ITextRenderer renderer = new ITextRenderer();
-		renderer.setDocumentFromString(htmlDocument);
-		renderer.layout();
+      String htmlDocument = converter.constructRestDocument(json.title,
+               json.urls, Boolean.TRUE, Boolean.TRUE);
 
-		StreamingOutput stream = new StreamingOutput() {
-			public void write(OutputStream output) throws IOException,
-					WebApplicationException {
-				try {
-					renderer.createPDF(output);
-				} catch (Exception e) {
-					throw new WebApplicationException(e);
-				}
-			}
-		};
+      final ITextRenderer renderer = new ITextRenderer();
+      renderer.setDocumentFromString(htmlDocument);
+      renderer.layout();
 
-		return Response
-				.ok(stream)
-				.header("content-disposition",
-						"attachment; filename = export.pdf").build();
+      StreamingOutput stream = new StreamingOutput() {
+         public void write(OutputStream output) throws IOException,
+                  WebApplicationException
+         {
+            try {
+               renderer.createPDF(output);
+            }
+            catch (Exception e) {
+               throw new WebApplicationException(e);
+            }
+         }
+      };
 
-	}
+      return Response
+               .ok(stream)
+               .header("content-disposition",
+                        "attachment; filename = export.pdf").build();
+
+   }
 }
