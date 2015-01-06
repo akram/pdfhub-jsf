@@ -6,6 +6,7 @@
 	<packaging>war</packaging>
 	<version>1.0</version>
 	<name>pdfhub</name>
+	
 	<repositories>
 		<repository>
 			<id>eap</id>
@@ -30,29 +31,25 @@
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>
+	
+	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.6</maven.compiler.source>
 		<maven.compiler.target>1.6</maven.compiler.target>
+		
+		<version.saucer>9.0.7</version.saucer>
+		<version.itext>4.2.1</version.itext>
+		<version.jsoup>1.8.1</version.jsoup>
+		<version.primefaces>5.1</version.primefaces>
+		<version.omnifaces>2.0</version.omnifaces>
+		<version.slf4j>1.7.5</version.slf4j>
+		<version.commons.lang>3.3.2</version.commons.lang>
 	</properties>
+	
+	
 	<dependencies>
-<!--
-As updates are released for EAP the version of the provided jboss-javaee-6.0
-jar can change.  To ensure your application is compiling against the same jars
-that the runtime provides the <version> element below should match the
-installed version of EAP on the node hosting your application.  To determine
-the version of EAP running on the node, log into an example EAP application and
-look in the jbosseap/logs/server.log file for the line:
 
-... JBAS015874: JBoss EAP 6.1.1.GA (AS 7.2.1.Final-redhat-10) started ...
-
-To determine the correct value for <version>, download the maven repository zip
-file corresponding to the installed version of EAP from the customer service
-portal [1].  Unzip the file and examine the single directory under
-jboss-eap-*-maven-repository/org/jboss/spec/jboss-javaee-6.0
-
-[1] https://access.redhat.com/jbossnetwork/restricted/listSoftware.html?downloadType=distributions&product=appplatform&productChanged=yes"
--->
 		<dependency>
 			<groupId>org.jboss.spec</groupId>
 			<artifactId>jboss-javaee-6.0</artifactId>
@@ -63,45 +60,45 @@ jboss-eap-*-maven-repository/org/jboss/spec/jboss-javaee-6.0
 		<dependency>
 			<groupId>org.jsoup</groupId>
 			<artifactId>jsoup</artifactId>
-			<version>1.7.3</version>
+			<version>${version.jsoup}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.lowagie</groupId>
 			<artifactId>itext</artifactId>
-			<version>4.2.1</version>
+			<version>${version.itext}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.xhtmlrenderer</groupId>
 			<artifactId>flying-saucer-core</artifactId>
-			<version>9.0.3</version>
+			<version>${version.saucer}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.xhtmlrenderer</groupId>
 			<artifactId>flying-saucer-pdf</artifactId>
-			<version>9.0.3</version>
+			<version>${version.saucer}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
-			<version>3.1</version>
+			<version>${version.commons.lang}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.primefaces</groupId>
 			<artifactId>primefaces</artifactId>
-			<version>4.0</version>
+			<version>${version.primefaces}</version>
 		</dependency>
 		<!-- for CDI ViewScoped -->
 		<dependency>
 			<groupId>org.omnifaces</groupId>
 			<artifactId>omnifaces</artifactId>
-			<version>1.6.3</version>
+			<version>${version.omnifaces}</version>
 		</dependency>
 		<!-- for CDI ViewScoped -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>1.7.5</version>
+			<version>${version.slf4j}</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>

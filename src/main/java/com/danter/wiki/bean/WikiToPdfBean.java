@@ -13,6 +13,7 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
 
 import org.omnifaces.cdi.ViewScoped;
 import org.primefaces.model.DefaultStreamedContent;
@@ -23,6 +24,7 @@ import org.slf4j.LoggerFactory;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
 import com.danter.wiki.util.ConvertGithubWiki;
+import com.danter.wiki.util.ServletUtil;
 import com.lowagie.text.DocumentException;
 
 /**
@@ -37,7 +39,7 @@ public class WikiToPdfBean implements Serializable {
 	private static final Logger LOG = LoggerFactory
 			.getLogger(WikiToPdfBean.class);
 
-	private String contextPath = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
+	private String contextPath;
 	
 	
 	private String wikiUrl;
@@ -53,6 +55,10 @@ public class WikiToPdfBean implements Serializable {
 	 * Creates a new instance of WikiToPdfBean
 	 */
 	public WikiToPdfBean() {
+		
+		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		
+		contextPath = ServletUtil.createURL(request, "");
 	}
 
 	public void goBtnAction() {
@@ -156,7 +162,7 @@ public class WikiToPdfBean implements Serializable {
 			ByteArrayOutputStream os = null;
 			try {
 				os = new ByteArrayOutputStream();
-
+				
 				ITextRenderer renderer = new ITextRenderer();
 				renderer.setDocumentFromString(htmlDocument);
 				renderer.layout();
@@ -208,5 +214,5 @@ public class WikiToPdfBean implements Serializable {
 		return goodInput;
 
 	}
-
+	
 }

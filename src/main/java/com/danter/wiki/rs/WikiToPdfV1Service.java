@@ -21,6 +21,7 @@ import org.xhtmlrenderer.pdf.ITextRenderer;
 
 import com.danter.wiki.entity.PdfJsonObject;
 import com.danter.wiki.util.ConvertGithubWiki;
+import com.danter.wiki.util.ServletUtil;
 
 @Path("/v1")
 public class WikiToPdfV1Service {
@@ -39,7 +40,7 @@ public class WikiToPdfV1Service {
 
 		LOG.warn(json.toString());
 
-		ConvertGithubWiki converter = new ConvertGithubWiki("", servletRequest.getContextPath());
+		ConvertGithubWiki converter = new ConvertGithubWiki("", ServletUtil.createURL(servletRequest, ""));
 
 		String htmlDocument = converter.constructRestDocument(json.title,
 				json.urls, Boolean.TRUE, Boolean.TRUE);
