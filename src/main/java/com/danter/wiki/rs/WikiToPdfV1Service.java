@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URISyntaxException;
 
+import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -23,19 +25,23 @@ import com.danter.wiki.util.ConvertGithubWiki;
 @Path("/v1")
 public class WikiToPdfV1Service {
 
-	private static final Logger LOG = LoggerFactory.getLogger(WikiToPdfV1Service.class);
+	private static final Logger LOG = LoggerFactory
+			.getLogger(WikiToPdfV1Service.class);
 	
-	
+	@Inject
+	HttpServletRequest request;
+
 	@POST
 	@Produces("application/pdf")
 	@Path("/pdf")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response pdfFromList(PdfJsonObject json) throws IOException, URISyntaxException {
+	public Response pdfFromList(PdfJsonObject json) throws IOException,
+			URISyntaxException {
 
 		LOG.warn(json.toString());
-		
-		ConvertGithubWiki converter = new ConvertGithubWiki("");
-		
+
+		ConvertGithubWiki converter = new ConvertGithubWiki("", request.getContextPath());
+
 		String htmlDocument = converter.constructRestDocument(json.title,
 				json.urls, Boolean.TRUE, Boolean.TRUE);
 

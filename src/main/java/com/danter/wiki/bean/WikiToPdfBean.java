@@ -37,6 +37,9 @@ public class WikiToPdfBean implements Serializable {
 	private static final Logger LOG = LoggerFactory
 			.getLogger(WikiToPdfBean.class);
 
+	private String contextPath = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
+	
+	
 	private String wikiUrl;
 	private DualListModel<String> wikiPages;
 	private Boolean includeHeader = Boolean.TRUE;
@@ -58,7 +61,7 @@ public class WikiToPdfBean implements Serializable {
 			wikiUrl = "https://github.com/redhat-consulting/jbpm-ee/wiki";
 		}
 		try {
-			ConvertGithubWiki converter = new ConvertGithubWiki(wikiUrl);
+			ConvertGithubWiki converter = new ConvertGithubWiki(wikiUrl, contextPath);
 
 			List<String> pagesTarget = new ArrayList<String>();
 
@@ -138,11 +141,11 @@ public class WikiToPdfBean implements Serializable {
 		pdf = null;
 		
 		if (receivedGoodInput()) {
-
+			
 			String fileName = wikiUrl.replaceAll("http(s)*://github.com/", "")
 					.replaceAll("/", "_").replace("_wiki", "") + new SimpleDateFormat("-yyyy-M-dd_HH-mm-ss-SS").format(new Date()) + ".pdf";
 
-			ConvertGithubWiki converter = new ConvertGithubWiki(wikiUrl);
+			ConvertGithubWiki converter = new ConvertGithubWiki(wikiUrl, contextPath);
 			String htmlDocument = null;
 			try {
 				htmlDocument = converter.constructDocument(wikiTitle, wikiPages.getTarget(), includeHeader, includePageNums);
