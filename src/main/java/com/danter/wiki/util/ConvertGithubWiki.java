@@ -206,7 +206,7 @@ public class ConvertGithubWiki {
 				if (selectedName.equals(pageTitle)) {
 
 					Document pageDoc = Jsoup.connect(href).get();
-					Element wikiContent = pageDoc.select("div#wiki-content")
+					Element wikiContent = pageDoc.select("div.markdown-body")
 							.first();
 					wikiContent.select(":containsOwn(\u00a0)").remove();
 
@@ -229,7 +229,7 @@ public class ConvertGithubWiki {
 		for (String url : pageUrls) {
 
 			Document pageDoc = Jsoup.connect(url).get();
-			Element wikiContent = pageDoc.select("markdown-body").first();
+			Element wikiContent = pageDoc.select("body").first();
 
 			fullDocument += cleanHtmlOutput(wikiContent.toString(), url);
 		}
