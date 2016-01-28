@@ -196,9 +196,7 @@ public class WikiToPdfBean implements Serializable
 
          }
          catch (Exception ex) {
-
             LOG.error(ex.getMessage());
-
          }
          finally {
             try {
