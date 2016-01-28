@@ -25,7 +25,6 @@ import org.xhtmlrenderer.pdf.ITextRenderer;
 
 import com.danter.wiki.util.ConvertGithubWiki;
 import com.danter.wiki.util.ServletUtil;
-import com.lowagie.text.DocumentException;
 
 /**
  * 
@@ -196,7 +195,7 @@ public class WikiToPdfBean implements Serializable
             pdf = new DefaultStreamedContent(bais, "application/pdf", fileName);
 
          }
-         catch (DocumentException ex) {
+         catch (Exception ex) {
 
             LOG.error(ex.getMessage());
 

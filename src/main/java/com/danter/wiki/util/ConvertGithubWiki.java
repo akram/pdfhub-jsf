@@ -20,7 +20,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
-import com.lowagie.text.DocumentException;
 
 /**
  * @author mdanter
@@ -131,10 +130,7 @@ public class ConvertGithubWiki
 
          renderer.createPDF(os);
       }
-      catch (DocumentException e) {
-         LOG.error(e.getMessage());
-      }
-      catch (FileNotFoundException e) {
+      catch (Exception e) {
          LOG.error(e.getMessage());
       }
       finally {
